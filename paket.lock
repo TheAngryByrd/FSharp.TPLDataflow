@@ -14,6 +14,7 @@ NUGET
     Microsoft.Net.Http (2.2.29)
       Microsoft.Bcl (>= 1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
+    Microsoft.Tpl.Dataflow (4.5.24)
     NUnit (2.6.4)
     NUnit.Runners (2.6.4)
     Octokit (0.13.0)
