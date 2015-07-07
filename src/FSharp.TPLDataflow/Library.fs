@@ -1,4 +1,4 @@
-namespace FSharp.TPLDataflow
+﻿namespace FSharp.TPLDataflow
 
 /// Documentation for my library
 ///
