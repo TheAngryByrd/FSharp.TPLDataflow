@@ -1,0 +1,23 @@
+type project
+owners
+    Jimmy Byrd
+authors 
+    Jimmy Byrd
+projectUrl
+    http://github.com/theangrybyrd/FSharp.TPLDataflow
+iconUrl
+    https://raw.githubusercontent.com/theangrybyrd/FSharp.TPLDataflow/master/docs/files/img/logo.png
+licenseUrl
+    http://github.com/theangrybyrd/FSharp.TPLDataflow/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+copyright
+    Copyright 2015
+tags
+    TPL-Dataflow TPL Dataflow
+summary
+    An FSharp wrapper libray for TPL Dataflow
+description
+    An FSharp wrapper library for TPL Dataflow
+
+
