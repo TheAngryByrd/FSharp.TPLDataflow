@@ -1,6 +1,6 @@
 module FSharp.TPLDataflow.Tests
 
-open FSharp.TPLDataflow
+open Microsoft.Threading.Tasks.Dataflow.FSharp
 open NUnit.Framework
 
 
