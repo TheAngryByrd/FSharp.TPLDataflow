@@ -1,6 +1,22 @@
 ﻿namespace Microsoft.Threading.Tasks.Dataflow.FSharp
 
+[<AutoOpen>]
+module TPLDataflowEx =
+    open System
+    open System.Threading
+    open System.Threading.Tasks.Dataflow
+    
+    type ITargetBlock<'a> with     
+        member x.AsyncSend<'a> (msg, ct) = DataflowBlock.SendAsync<'a>(x,msg,ct) |> Async.AwaitTask
+        member x.AsyncSend<'a> msg = x.AsyncSend(msg, CancellationToken.None)
 
+    type ISourceBlock<'a> with
+        member x.AsyncReceive<'a> (ct : CancellationToken) = DataflowBlock.ReceiveAsync<'a>(x,ct) |> Async.AwaitTask
+        member x.AsyncReceive<'a> (timeout : TimeSpan, ct : CancellationToken) = DataflowBlock.ReceiveAsync<'a>(x,timeout,ct) |> Async.AwaitTask |> Async.Catch
+        member x.AsyncReceive<'a> (timeout : TimeSpan) = x.AsyncReceive(timeout, CancellationToken.None)
+        member x.AsyncReceive<'a> () = x.AsyncReceive(CancellationToken.None)
+        member x.AsyncOutputAvailable<'a> ct = x.OutputAvailableAsync(ct) |> Async.AwaitTask
+        member x.AsyncOutputAvailable<'a> () = x.AsyncOutputAvailable(CancellationToken.None)
 
 module TPLDataflow =
 
@@ -128,7 +144,7 @@ module TPLDataflow =
     /// <param name="message">The message being offered to the target.</param>
     /// <param name="target">The target to which to post the data.</param>
     /// <returns>A <see cref="T:System.Threading.Tasks.Task`1" /> that represents the asynchronous send. If the target accepts and consumes the offered element during the call to <see cref="M:System.Threading.Tasks.Dataflow.DataflowBlock.SendAsync``1(System.Threading.Tasks.Dataflow.ITargetBlock{``0},``0)" />, upon return from the call the resulting <see cref="T:System.Threading.Tasks.Task`1" /> will be completed and its <see cref="P:System.Threading.Tasks.Task`1.Result" /> property will return true. If the target declines the offered element during the call, upon return from the call the resulting <see cref="T:System.Threading.Tasks.Task`1" /> will be completed and its <see cref="P:System.Threading.Tasks.Task`1.Result" /> property will return false. If the target postpones the offered element, the element will be buffered until such time that the target consumes or releases it, at which point the task will complete, with its <see cref="P:System.Threading.Tasks.Task`1.Result" /> indicating whether the message was consumed. If the target never attempts to consume or release the message, the returned task will never complete.</returns>   
-    let (!>) message (target : ITargetBlock<_>)  = target.SendAsync(message) |> Async.AwaitTask
+    let (!>) message (target : ITargetBlock<_>)  = target.AsyncSend(message)
      
     /// <summary>Asynchronously offers a message to the target message block, allowing for postponement.</summary>
     /// <param name="message">The message being offered to the target.</param>
