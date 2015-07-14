@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\jimmy_000\Documents\GitHub\FSharp.TPLDataflow\tests\FSharp.TPLDataflow.Tests\bin\Release\FSharp.TPLDataflow.Tests.dll" total="0" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-07" time="22:32:03">
+<test-results name="C:\Users\jimmy_000\Documents\GitHub\FSharp.TPLDataflow\tests\FSharp.TPLDataflow.Tests\bin\Release\FSharp.TPLDataflow.Tests.dll" total="0" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-07" time="22:51:16">
   <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.8009" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Users\jimmy_000\Documents\GitHub\FSharp.TPLDataflow" machine-name="NINJA" user="jimmy_000" user-domain="NINJA" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Assembly" name="C:\Users\jimmy_000\Documents\GitHub\FSharp.TPLDataflow\tests\FSharp.TPLDataflow.Tests\bin\Release\FSharp.TPLDataflow.Tests.dll" executed="True" result="Inconclusive" success="False" time="0.016" asserts="0" />
+  <test-suite type="Assembly" name="C:\Users\jimmy_000\Documents\GitHub\FSharp.TPLDataflow\tests\FSharp.TPLDataflow.Tests\bin\Release\FSharp.TPLDataflow.Tests.dll" executed="True" result="Inconclusive" success="False" time="0.015" asserts="0" />
 </test-results>

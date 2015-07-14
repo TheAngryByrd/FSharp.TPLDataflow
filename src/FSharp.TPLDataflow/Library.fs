@@ -1,5 +1,7 @@
 ﻿namespace Microsoft.Threading.Tasks.Dataflow.FSharp
 
+
+
 module TPLDataflow =
 
     open System
@@ -34,39 +36,38 @@ module TPLDataflow =
     /// <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformBlock`2" /> with the specified <see cref="T:System.Func`2" /></summary>
     /// <param name="f">The function to tranform each element received.</param>
     /// <param name="executionOptions">The options with which to configure this <see cref="T:System.Threading.Tasks.Dataflow.TransformBlock`2" />.</param>
-    let transformBlockWithOptions (f: 'a -> 'b) executionOptions = TransformBlock<_,_>(f, executionOptions)
+    let mapBlockWithOptions (f: 'a -> 'b) executionOptions = TransformBlock<_,_>(f, executionOptions)
     
     /// <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformBlock`2" /> with the specified <see cref="T:System.Func`2" /></summary>
     /// <param name="f">The function to tranform each element received.</param>
-    let transformBlock f = transformBlockWithOptions f defaultExecutionOptions
+    let mapBlock f = mapBlockWithOptions f defaultExecutionOptions
     
     /// <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformBlock`2" /> with the specified <see cref="T:System.Func`2" /></summary>
     /// <param name="f">The async function to tranform each element received.</param>
     /// <param name="executionOptions">The options with which to configure this <see cref="T:System.Threading.Tasks.Dataflow.TransformBlock`2" />.</param>
-    let transformBlockAsyncWithOptions (f : 'a -> Async<'b>) executionOptions = TransformBlock<'a,'b>(f >> Async.StartAsTask, executionOptions)
+    let mapBlockAsyncWithOptions (f : 'a -> Async<'b>) executionOptions = TransformBlock<'a,'b>(f >> Async.StartAsTask, executionOptions)
     
     /// <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformBlock`2" /> with the specified <see cref="T:System.Func`2" /></summary>
     /// <param name="f">The async function to tranform each element received.</param>
-    let transformBlockAsync f = transformBlockAsyncWithOptions f defaultExecutionOptions  
-
+    let mapBlockAsync f = mapBlockAsyncWithOptions f defaultExecutionOptions  
   
     ///  <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" /> with the specified function</summary>  
     /// <param name="f">The function to tranform each element received. All of the data from the returned in the <see cref="T:System.Collections.Generic.IEnumerable`1" /> will be made available as output from this <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" /></param>
     /// <param name="executionOptions">The options with which to configure this <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" />.</param>
-    let transformManyBlockWithOptions (f : 'a -> seq<'b>) executionOptions = TransformManyBlock<_,_>(f, executionOptions)
+    let flatpMapBlockWithOptions (f : 'a -> seq<'b>) executionOptions = TransformManyBlock<_,_>(f, executionOptions)
 
     ///  <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" /> with the specified function</summary>  
     /// <param name="f">The function to tranform each element received. All of the data from the returned in the <see cref="T:System.Collections.Generic.IEnumer
-    let transformManyBlock (f : 'a -> seq<'b>) = transformManyBlockWithOptions f defaultExecutionOptions    
+    let flatpMapBlock (f : 'a -> seq<'b>) = flatpMapBlockWithOptions f defaultExecutionOptions    
 
     ///  <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" /> with the specified function</summary>  
     /// <param name="f">The async function to tranform each element received. All of the data from the returned in the <see cref="T:System.Collections.Generic.IEnumerable`1" /> will be made available as output from this <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" /></param>
     /// <param name="executionOptions">The options with which to configure this <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" />.</param>
-    let transformManyBlockAsyncWithOptions (f : 'a -> Async<seq<'b>>) executionOptions =  TransformManyBlock(f >> Async.StartAsTask, executionOptions)
+    let flatpMapBlockAsyncWithOptions (f : 'a -> Async<seq<'b>>) executionOptions =  TransformManyBlock(f >> Async.StartAsTask, executionOptions)
 
     ///  <summary>Initializes a new <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" /> with the specified function</summary>  
     /// <param name="f">The async function to tranform each element received. All of the data from the returned in the <see cref="T:System.Collections.Generic.IEnumerable`1" /> will be made available as output from this <see cref="T:System.Threading.Tasks.Dataflow.TransformManyBlock`2" /></param>
-    let transformManyBlockAsync (f : 'a -> Async<seq<'b>>) = transformManyBlockAsyncWithOptions f defaultExecutionOptions
+    let flatpMapBlockAsync (f : 'a -> Async<seq<'b>>) = flatpMapBlockAsyncWithOptions f defaultExecutionOptions
 
     /// <summary>Links the <see cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" /> to the specified <see cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />.</summary>   
     /// <param name="target">The <see cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" /> to which to connect the source.</param>
@@ -127,10 +128,10 @@ module TPLDataflow =
     /// <param name="message">The message being offered to the target.</param>
     /// <param name="target">The target to which to post the data.</param>
     /// <returns>A <see cref="T:System.Threading.Tasks.Task`1" /> that represents the asynchronous send. If the target accepts and consumes the offered element during the call to <see cref="M:System.Threading.Tasks.Dataflow.DataflowBlock.SendAsync``1(System.Threading.Tasks.Dataflow.ITargetBlock{``0},``0)" />, upon return from the call the resulting <see cref="T:System.Threading.Tasks.Task`1" /> will be completed and its <see cref="P:System.Threading.Tasks.Task`1.Result" /> property will return true. If the target declines the offered element during the call, upon return from the call the resulting <see cref="T:System.Threading.Tasks.Task`1" /> will be completed and its <see cref="P:System.Threading.Tasks.Task`1.Result" /> property will return false. If the target postpones the offered element, the element will be buffered until such time that the target consumes or releases it, at which point the task will complete, with its <see cref="P:System.Threading.Tasks.Task`1.Result" /> indicating whether the message was consumed. If the target never attempts to consume or release the message, the returned task will never complete.</returns>   
-    let (!>) message (target : ITargetBlock<_>)  = target.SendAsync(message)
-
+    let (!>) message (target : ITargetBlock<_>)  = target.SendAsync(message) |> Async.AwaitTask
+     
     /// <summary>Asynchronously offers a message to the target message block, allowing for postponement.</summary>
     /// <param name="message">The message being offered to the target.</param>
     /// <param name="target">The target to which to post the data.</param>
     /// <returns>A <see cref="T:System.Threading.Tasks.Task`1" /> that represents the asynchronous send. If the target accepts and consumes the offered element during the call to <see cref="M:System.Threading.Tasks.Dataflow.DataflowBlock.SendAsync``1(System.Threading.Tasks.Dataflow.ITargetBlock{``0},``0)" />, upon return from the call the resulting <see cref="T:System.Threading.Tasks.Task`1" /> will be completed and its <see cref="P:System.Threading.Tasks.Task`1.Result" /> property will return true. If the target declines the offered element during the call, upon return from the call the resulting <see cref="T:System.Threading.Tasks.Task`1" /> will be completed and its <see cref="P:System.Threading.Tasks.Task`1.Result" /> property will return false. If the target postpones the offered element, the element will be buffered until such time that the target consumes or releases it, at which point the task will complete, with its <see cref="P:System.Threading.Tasks.Task`1.Result" /> indicating whether the message was consumed. If the target never attempts to consume or release the message, the returned task will never complete.</returns> 
-    let (<!) (target : ITargetBlock<_>) message  = target.SendAsync(message)  
+    let (<!) (target : ITargetBlock<_>) message  = message !> target
