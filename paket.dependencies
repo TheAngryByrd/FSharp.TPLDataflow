@@ -1,10 +1,9 @@
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
 
-nuget FSharp.Formatting
-nuget Microsoft.Tpl.Dataflow
-nuget NUnit 
-nuget NUnit.Runners
-nuget FAKE
-nuget SourceLink.Fake
+storage: none
 
-github fsharp/FAKE modules/Octokit/Octokit.fsx
+nuget System.Threading.Tasks.Dataflow 4.9.0
+nuget FSharp.Core
+nuget Microsoft.NET.Test.Sdk 15.9.0
+nuget xunit 2.4.0
+nuget xunit.runner.visualstudio 2.4.0

@@ -1,1 +1,2 @@
-Microsoft.Tpl.Dataflow
+FSharp.Core
+System.Threading.Tasks.Dataflow
