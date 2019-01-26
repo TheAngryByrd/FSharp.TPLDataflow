@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Threading.Tasks.Dataflow.FSharp
+﻿namespace System.Threading.Tasks.Dataflow.FSharp
 
 [<AutoOpen>]
 module TPLDataflowEx =

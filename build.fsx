@@ -17,10 +17,16 @@ Target.create "Build" (fun _ ->
     |> Seq.iter (DotNet.build id)
 )
 
+Target.create "Test" (fun _ ->
+    !! "tests/**/*.*proj"
+    |> Seq.iter (DotNet.test id)
+)
+
 Target.create "All" ignore
 
 "Clean"
   ==> "Build"
+  ==> "Test"
   ==> "All"
 
 Target.runOrDefault "All"
