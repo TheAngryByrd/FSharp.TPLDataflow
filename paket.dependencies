@@ -1,9 +1,17 @@
-source https://api.nuget.org/v3/index.json
+// [ FAKE GROUP ]
+group Build
+    storage none
+    source https://api.nuget.org/v3/index.json
+    nuget Fake.DotNet.Cli
+    nuget Fake.IO.FileSystem
+    nuget Fake.Core.Target
 
-storage: none
-
-nuget System.Threading.Tasks.Dataflow 4.9.0
-nuget FSharp.Core
-nuget Microsoft.NET.Test.Sdk 15.9.0
-nuget xunit 2.4.0
-nuget xunit.runner.visualstudio 2.4.0
+group Main
+    storage: none
+    source https://api.nuget.org/v3/index.json
+    
+    nuget System.Threading.Tasks.Dataflow 4.9.0
+    nuget FSharp.Core 4.5.2
+    nuget Microsoft.NET.Test.Sdk 15.9.0
+    nuget xunit 2.4.0
+    nuget xunit.runner.visualstudio 2.4.0
